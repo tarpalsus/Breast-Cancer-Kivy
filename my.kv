@@ -1,0 +1,202 @@
+#:kivy 1.0.9
+<LoadDialog>:
+    BoxLayout:
+        height: root.height/20
+        pos: root.pos
+        orientation: "vertical"
+        spacing:0
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
+
+
+<MedicalWidget>:
+    BoxLayout:
+        id: BigGrid
+        orientation: 'horizontal'
+        spacing: 23
+        canvas:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                pos: self.center_x , 0
+                size: 10, self.height
+
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            BoxLayout:
+
+                size_hint_x: None
+                size_hint_y: None
+                size: root.width/5,root.height/20
+                spacing: 50
+                id: Buttons
+                orientation: 'horizontal'
+                pos_hint: { 'center_x' : .5, 'top': .1 }
+                Button:
+                    text: 'Start'
+                    on_press: root.plot()
+                Button:
+                    text: 'Stop'
+                    on_press: root.stop()
+            BoxLayout:
+                size_hint_x: None
+                size_hint_y: None
+                height: root.height*0.6
+                width: root.width/2
+                pos: root.pos
+                orientation: "vertical"
+                spacing:0
+                FileChooserListView:
+                    id: filechooser
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: 30
+                    Button:
+                        text: "Cancel"
+                        on_release: root.cancel()
+
+                    Button:
+                        text: "Load"
+                        on_release: root.load(filechooser.path, filechooser.selection)
+
+
+            GridLayout:
+                cols:5
+                rows:2
+                size_hint_x: None
+                size_hint_y: None
+                size:root.width/2,2*root.height/10
+                MyLayout:
+                    TextInput:
+                        id:clump
+                    Label:
+                        text: 'Clump thickness'
+                MyLayout:
+                    TextInput:
+                        id:cell_size
+                    Label:
+                        text: 'Unif Cell Size'
+                MyLayout:
+                    TextInput:
+                        id:cell_shape
+                    Label:
+                        text: 'Unif Cell Shape'
+                MyLayout:
+                    TextInput:
+                        id:adhesion
+                    Label:
+                        text: 'Marginal Adhesion'
+                MyLayout:
+                    TextInput:
+                        id:epithelial
+                    Label:
+                        text: 'Single Epithelial'
+                MyLayout:
+                    TextInput:
+                        id:bare
+                    Label:
+                        text: 'Bare Nuclei'
+                MyLayout:
+                    TextInput:
+                        id:bland
+                    Label:
+                        text: 'Bland Chromatin'
+                MyLayout:
+                    TextInput:
+                        id:nucleoli
+                    Label:
+                        text: 'Normal Nucleoli'
+                MyLayout:
+                    TextInput:
+                        id:mitose
+                    Label:
+                        text: 'Mitoses'
+                MyLayout:
+                    TextInput:
+                        id:ID
+                    Label:
+                        text: 'ID'
+            BoxLayout:
+                orientation:'vertical'
+                pos_hint_x: None
+                pos_hint_y: None
+                pos: self.pos
+                size_hint_x: None
+                size_hint_y: None
+                size:root.width/2,3*root.height/20
+
+                Button:
+                    id: Algorithm
+                    text:'Algorithm'
+                    size_hint_x: None
+                    size_hint_y: None
+                    size:root.width/2,root.height/20
+                    on_release: root.call_dropdown(self)
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            id: plots
+
+
+<CustomDropDown>:
+    DropDown:
+        id: drop
+        size_hint_x: None
+        width:root.width
+        Button:
+            text: 'Random Forest'
+            size_hint_y: None
+            size_hint_x: None
+            height: 44
+            width: drop.width
+            on_release: root.select(self.text)
+        Button:
+            text: 'SVC'
+            size_hint_y: None
+            size_hint_x: None
+            height: 44
+            width: drop.width
+            on_release: root.select(self.text)
+        Button:
+            text: 'KNN'
+            size_hint_y: None
+            size_hint_x: None
+            height: 44
+            width: drop.width
+            on_release: root.select(self.text)
+
+<MyLayout@BoxLayout>:
+    orientation: 'vertical'
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
